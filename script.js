@@ -324,19 +324,12 @@ function buildQrPayload() {
 
       const phone = rawPhone.replace(/\D/g, "");
       const message = getInputValue("whatsappText");
-      const platform = document.querySelector('input[name="whatsappPlatform"]:checked').value;
       const params = new URLSearchParams();
       if (message) {
         params.set("text", message);
       }
-
       const query = params.toString();
-      let value;
-      if (platform === "business") {
-        value = query ? `https://wa.business.me/${phone}?${query}` : `https://wa.business.me/${phone}`;
-      } else {
-        value = query ? `https://wa.me/${phone}?${query}` : `https://wa.me/${phone}`;
-      }
+      const value = query ? `https://wa.me/${phone}?${query}` : `https://wa.me/${phone}`;
       return { value };
     }
 

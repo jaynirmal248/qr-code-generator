@@ -1,7 +1,26 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to this project are documented here.
 
+## [1.2.0] - 2026-03-31
+
+### Changed
+
+- Recreated the entire app interface with a fresh professional layout architecture across hero, tabs, builder panels, preview, and modal dialogs.
+- Rebuilt the full visual system with new spacing, typography rhythm, soft gradients, shadows, border treatment, and component polish for a premium white-themed experience.
+- Redesigned the content-type tab strip for better clarity and control using swipe-friendly behavior, stronger active states, and improved desktop-to-mobile interaction consistency.
+- Reworked form and action ergonomics for mobile by increasing touch targets, refining field density, and improving vertical flow.
+- Rebalanced workspace responsiveness so the preview panel is prioritized on smaller screens while preserving strong desktop composition.
+- Refined modal and status surfaces to keep warning, quality, and download messaging readable and professional at every viewport size.
+
+## [1.1.2] - 2026-03-31
+
+### Changed
+
+- Completely rebuilt the entire application UI from the ground up for a true professional, studio-grade appearance.
+- Re-architected the responsive layout structure to flawlessly handle PC, tablet, and mobile devices using a modernized CSS Grid approach.
+- Overhauled color palettes, typography, shadows, structural element spacing, buttons, and input fields to follow best-in-class SaaS design patterns.
+- Resolved previous mobile layout limitations by implementing optimal viewing hierarchies, prioritizing the QR code preview on small screens.
 ## [1.1.1] - 2026-03-30
 
 ### Added
@@ -129,3 +148,4 @@ All notable changes to this project are documented here.
 - Input validation, size selection, and PNG download support.
 - Professional white-themed responsive UI.
 - Project governance files for update tracking and GitHub release catalog.
+
