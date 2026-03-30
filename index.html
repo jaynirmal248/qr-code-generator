@@ -11,100 +11,306 @@
 </head>
 <body>
   <main class="page">
-    <section class="card intro reveal-1">
-      <p class="eyebrow">Web Utility</p>
-      <h1>QR Code Generator</h1>
-      <p class="subtitle">Create high-quality QR codes instantly with a clean export workflow.</p>
-    </section>
+    <header class="card intro reveal-1">
+      <div class="intro-top">
+        <div>
+          <p class="eyebrow">QR Studio</p>
+          <h1>QR Code Generator</h1>
+          <p class="subtitle">Create polished QR codes with structured content templates and quality-safe downloads.</p>
+        </div>
+        <span class="mode-chip">Static Codes</span>
+      </div>
+
+      <nav class="type-menu" id="typeMenu" aria-label="QR content types">
+        <button type="button" class="type-tab active" data-type="url">URL</button>
+        <button type="button" class="type-tab" data-type="text">Text</button>
+        <button type="button" class="type-tab" data-type="email">Email</button>
+        <button type="button" class="type-tab" data-type="phone">Phone</button>
+        <button type="button" class="type-tab" data-type="sms">SMS</button>
+        <button type="button" class="type-tab" data-type="wifi">WiFi</button>
+        <button type="button" class="type-tab" data-type="location">Location</button>
+        <button type="button" class="type-tab" data-type="vcard">vCard</button>
+        <button type="button" class="type-tab" data-type="mecard">MeCard</button>
+        <button type="button" class="type-tab" data-type="event">Event</button>
+        <button type="button" class="type-tab" data-type="bitcoin">Bitcoin</button>
+        <button type="button" class="type-tab" data-type="facebook">Facebook</button>
+        <button type="button" class="type-tab" data-type="twitter">Twitter</button>
+        <button type="button" class="type-tab" data-type="youtube">YouTube</button>
+        <button type="button" class="type-tab" data-type="instagram">Instagram</button>
+        <button type="button" class="type-tab" data-type="linkedin">LinkedIn</button>
+        <button type="button" class="type-tab" data-type="whatsapp">WhatsApp</button>
+        <button type="button" class="type-tab" data-type="app">App Link</button>
+      </nav>
+    </header>
 
     <section class="card tool reveal-2">
       <form id="qrForm" class="form" novalidate>
-        <label for="qrText">Content</label>
-        <textarea id="qrText" rows="5" maxlength="1200" placeholder="Paste a URL, text, phone number, or any content..."></textarea>
-        <p id="charCount" class="char-count">0 / 1200</p>
-
-        <label for="qrSize">QR Size</label>
-        <div class="size-control">
-          <input
-            id="qrSize"
-            class="size-slider"
-            type="range"
-            min="160"
-            max="1000"
-            step="20"
-            value="320"
-            aria-describedby="qrSizeValue"
-          />
-          <div class="size-meta">
-            <span>160 px</span>
-            <strong id="qrSizeValue">320 x 320</strong>
-            <span>1000 px</span>
+        <section class="setting-card">
+          <div class="setting-head">
+            <h2>Content Builder</h2>
+            <p id="contentTypeLabel">Type: URL</p>
           </div>
-        </div>
 
-        <label for="qrDetail">Pattern Detail</label>
-        <select id="qrDetail">
-          <option value="auto" selected>Auto</option>
-          <option value="dense">Dense (more dots)</option>
-          <option value="ultra">Ultra Dense (many dots)</option>
-        </select>
-
-        <label for="dotStyle">Dot Style</label>
-        <select id="dotStyle">
-          <option value="square" selected>Square</option>
-          <option value="round">Round</option>
-        </select>
-
-        <label for="dotFill">Dot Fill</label>
-        <div class="size-control">
-          <input
-            id="dotFill"
-            class="size-slider"
-            type="range"
-            min="55"
-            max="100"
-            step="1"
-            value="90"
-            aria-describedby="dotFillValue"
-          />
-          <div class="size-meta">
-            <span>55%</span>
-            <strong id="dotFillValue">90%</strong>
-            <span>100%</span>
+          <div class="content-panel active" data-type="url">
+            <label for="urlInput">Website URL</label>
+            <input id="urlInput" type="text" placeholder="https://example.com" />
           </div>
-        </div>
+
+          <div class="content-panel" data-type="text">
+            <label for="textInput">Plain Text</label>
+            <textarea id="textInput" rows="5" maxlength="1200" placeholder="Write your message..."></textarea>
+            <p class="char-count"><span id="charCount">0</span> / 1200</p>
+          </div>
+
+          <div class="content-panel" data-type="email">
+            <label for="emailAddress">Email Address</label>
+            <input id="emailAddress" type="email" placeholder="name@example.com" />
+            <label for="emailSubject">Subject</label>
+            <input id="emailSubject" type="text" placeholder="Hello from my QR" />
+            <label for="emailBody">Message</label>
+            <textarea id="emailBody" rows="3" placeholder="Write email body..."></textarea>
+          </div>
+
+          <div class="content-panel" data-type="phone">
+            <label for="phoneInput">Phone Number</label>
+            <input id="phoneInput" type="text" placeholder="+91 98765 43210" />
+          </div>
+
+          <div class="content-panel" data-type="sms">
+            <label for="smsPhone">Phone Number</label>
+            <input id="smsPhone" type="text" placeholder="+91 98765 43210" />
+            <label for="smsMessage">SMS Message</label>
+            <textarea id="smsMessage" rows="3" placeholder="Type message..."></textarea>
+          </div>
+
+          <div class="content-panel" data-type="wifi">
+            <label for="wifiSsid">Network Name (SSID)</label>
+            <input id="wifiSsid" type="text" placeholder="Office_WiFi" />
+            <label for="wifiSecurity">Security</label>
+            <select id="wifiSecurity">
+              <option value="WPA" selected>WPA/WPA2</option>
+              <option value="WEP">WEP</option>
+              <option value="nopass">No Password</option>
+            </select>
+            <label for="wifiPassword">Password</label>
+            <input id="wifiPassword" type="text" placeholder="WiFi password" />
+            <label class="checkline" for="wifiHidden">
+              <input id="wifiHidden" type="checkbox" />
+              Hidden network
+            </label>
+          </div>
+
+          <div class="content-panel" data-type="location">
+            <label for="locationLat">Latitude</label>
+            <input id="locationLat" type="text" placeholder="19.0760" />
+            <label for="locationLng">Longitude</label>
+            <input id="locationLng" type="text" placeholder="72.8777" />
+            <label for="locationQuery">Place Name (optional)</label>
+            <input id="locationQuery" type="text" placeholder="Niramay Studio" />
+          </div>
+
+          <div class="content-panel" data-type="vcard">
+            <label for="vcardFirst">First Name</label>
+            <input id="vcardFirst" type="text" placeholder="Jay" />
+            <label for="vcardLast">Last Name</label>
+            <input id="vcardLast" type="text" placeholder="Nirmal" />
+            <label for="vcardOrg">Company</label>
+            <input id="vcardOrg" type="text" placeholder="Niramay Studio" />
+            <label for="vcardTitle">Title</label>
+            <input id="vcardTitle" type="text" placeholder="Founder" />
+            <label for="vcardPhone">Phone</label>
+            <input id="vcardPhone" type="text" placeholder="+91 98765 43210" />
+            <label for="vcardEmail">Email</label>
+            <input id="vcardEmail" type="email" placeholder="name@example.com" />
+            <label for="vcardUrl">Website</label>
+            <input id="vcardUrl" type="text" placeholder="https://example.com" />
+          </div>
+
+          <div class="content-panel" data-type="mecard">
+            <label for="mecardName">Full Name</label>
+            <input id="mecardName" type="text" placeholder="Jay Nirmal" />
+            <label for="mecardPhone">Phone</label>
+            <input id="mecardPhone" type="text" placeholder="+91 98765 43210" />
+            <label for="mecardEmail">Email</label>
+            <input id="mecardEmail" type="email" placeholder="name@example.com" />
+            <label for="mecardUrl">Website</label>
+            <input id="mecardUrl" type="text" placeholder="https://example.com" />
+            <label for="mecardAddress">Address</label>
+            <input id="mecardAddress" type="text" placeholder="City, Country" />
+          </div>
+
+          <div class="content-panel" data-type="event">
+            <label for="eventTitle">Event Name</label>
+            <input id="eventTitle" type="text" placeholder="Launch Event" />
+            <label for="eventLocation">Location</label>
+            <input id="eventLocation" type="text" placeholder="Mumbai" />
+            <label for="eventStart">Start</label>
+            <input id="eventStart" type="datetime-local" />
+            <label for="eventEnd">End</label>
+            <input id="eventEnd" type="datetime-local" />
+            <label for="eventNotes">Notes</label>
+            <textarea id="eventNotes" rows="3" placeholder="Optional event notes..."></textarea>
+          </div>
+
+          <div class="content-panel" data-type="bitcoin">
+            <label for="btcAddress">Wallet Address</label>
+            <input id="btcAddress" type="text" placeholder="bc1..." />
+            <label for="btcAmount">Amount (BTC)</label>
+            <input id="btcAmount" type="text" placeholder="0.001" />
+            <label for="btcLabel">Label (optional)</label>
+            <input id="btcLabel" type="text" placeholder="Order #108" />
+          </div>
+
+          <div class="content-panel" data-type="facebook">
+            <label for="facebookUrl">Facebook URL</label>
+            <input id="facebookUrl" type="text" placeholder="https://facebook.com/yourpage" />
+          </div>
+
+          <div class="content-panel" data-type="twitter">
+            <label for="twitterUrl">X / Twitter URL</label>
+            <input id="twitterUrl" type="text" placeholder="https://x.com/yourhandle" />
+          </div>
+
+          <div class="content-panel" data-type="youtube">
+            <label for="youtubeUrl">YouTube URL</label>
+            <input id="youtubeUrl" type="text" placeholder="https://youtube.com/@channel" />
+          </div>
+
+          <div class="content-panel" data-type="instagram">
+            <label for="instagramUrl">Instagram URL</label>
+            <input id="instagramUrl" type="text" placeholder="https://instagram.com/username" />
+          </div>
+
+          <div class="content-panel" data-type="linkedin">
+            <label for="linkedinUrl">LinkedIn URL</label>
+            <input id="linkedinUrl" type="text" placeholder="https://linkedin.com/in/username" />
+          </div>
+
+          <div class="content-panel" data-type="whatsapp">
+            <label for="whatsappPhone">WhatsApp Number</label>
+            <input id="whatsappPhone" type="text" placeholder="919876543210" />
+            <label for="whatsappText">Prefilled Message (optional)</label>
+            <textarea id="whatsappText" rows="3" placeholder="Hi, I came from your QR code."></textarea>
+          </div>
+
+          <div class="content-panel" data-type="app">
+            <label for="appUrl">App or Store URL</label>
+            <input id="appUrl" type="text" placeholder="https://apps.apple.com/... or https://play.google.com/..." />
+          </div>
+        </section>
+
+        <section class="setting-card">
+          <div class="setting-head">
+            <h2>Design Settings</h2>
+            <p>Fine tune visual style and export quality.</p>
+          </div>
+
+          <label for="qrSize">QR Size</label>
+          <div class="size-control">
+            <input
+              id="qrSize"
+              class="size-slider"
+              type="range"
+              min="160"
+              max="1000"
+              step="20"
+              value="320"
+              aria-describedby="qrSizeValue"
+            />
+            <div class="size-meta">
+              <span>160 px</span>
+              <strong id="qrSizeValue">320 x 320</strong>
+              <span>1000 px</span>
+            </div>
+          </div>
+
+          <label for="qrDetail">Pattern Detail</label>
+          <select id="qrDetail">
+            <option value="auto" selected>Auto</option>
+            <option value="dense">Dense (more dots)</option>
+            <option value="ultra">Ultra Dense (many dots)</option>
+          </select>
+
+          <label for="dotStyle">Dot Style</label>
+          <select id="dotStyle">
+            <option value="square" selected>Square</option>
+            <option value="round">Round</option>
+          </select>
+
+          <label for="dotFill">Dot Fill</label>
+          <div class="size-control">
+            <input
+              id="dotFill"
+              class="size-slider"
+              type="range"
+              min="55"
+              max="100"
+              step="1"
+              value="90"
+              aria-describedby="dotFillValue"
+            />
+            <div class="size-meta">
+              <span>55%</span>
+              <strong id="dotFillValue">90%</strong>
+              <span>100%</span>
+            </div>
+          </div>
+        </section>
 
         <div class="button-row">
           <button type="submit" id="generateBtn">Generate QR</button>
           <button type="button" id="clearBtn" class="btn-secondary">Clear</button>
         </div>
-
-        <div id="scanWarning" class="scan-warning" hidden>
-          <strong>⚠ Scan Warning:</strong>
-          <p id="scanWarningText"></p>
-        </div>
       </form>
 
-      <div class="result-wrap">
+      <aside class="result-wrap">
         <div id="qrOutput" class="qr-output" aria-live="polite">
           <p class="placeholder">Your QR code will appear here</p>
         </div>
         <p class="preview-note">Preview stays fixed. Download/export uses selected pixel size.</p>
+
         <div class="quality-section">
           <div id="qualityBadge" class="quality-badge" hidden>
-            <span class="quality-label">Quality:</span>
+            <span class="quality-label">Quality</span>
             <strong id="qualityScore"></strong>
           </div>
         </div>
+
         <button id="downloadBtn" class="download-btn" type="button" disabled>Download PNG</button>
-        <div id="downloadWarning" class="download-warning" hidden>
-          <strong>⚠ Note:</strong>
+
+        <div id="downloadWarning" class="advisory-card" hidden>
+          <div class="advisory-head">
+            <span class="advisory-dot"></span>
+            <strong>Scan Reliability Advisory</strong>
+          </div>
           <p id="downloadWarningText"></p>
         </div>
+
         <p id="statusMessage" class="status">Ready to generate.</p>
-      </div>
+      </aside>
     </section>
   </main>
+
+  <div id="downloadModal" class="modal" hidden>
+    <div class="modal-overlay"></div>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
+      <div class="modal-header">
+        <h2 id="downloadModalTitle">Warning Before Download</h2>
+        <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-warnings">
+          <strong>Current settings may reduce scanability:</strong>
+          <p id="modalWarningsText"></p>
+        </div>
+        <p class="modal-info">You can still continue the download, or go back and adjust settings for better scan quality.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="modalCancelBtn" class="btn-secondary">Change Settings</button>
+        <button type="button" id="modalConfirmBtn" class="btn-primary">Download Anyway</button>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
   <script src="script.js"></script>

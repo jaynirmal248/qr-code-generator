@@ -1,9 +1,24 @@
 {
   "project": "QR Code Generator",
   "last_updated": "2026-03-30",
-  "latest_version": "1.0.9",
-  "total_updates": 10,
+  "latest_version": "1.1.0",
+  "total_updates": 11,
   "history": [
+    {
+      "id": 11,
+      "date": "2026-03-30",
+      "version": "1.1.0",
+      "summary": "Restored warning-gated download popup, redesigned settings UI, and added broad QR content type menu templates.",
+      "files_touched": [
+        "index.html",
+        "styles.css",
+        "script.js",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "COMMIT_DRAFT.md"
+      ]
+    },
     {
       "id": 10,
       "date": "2026-03-30",

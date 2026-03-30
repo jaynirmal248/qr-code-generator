@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented here.
 
+## [1.1.0] - 2026-03-30
+
+### Added
+
+- Added a professional header content-type menu inspired by modern QR generators.
+- Added structured QR templates for URL, Text, Email, Phone, SMS, WiFi, Location, vCard, MeCard, Event, Bitcoin, Facebook, X/Twitter, YouTube, Instagram, LinkedIn, WhatsApp, and App Link.
+- Added dedicated input panels so each setting group has its own separate UI block.
+
+### Changed
+
+- Restored download warning popup flow: when warnings are present, download now requires confirmation.
+- Upgraded warning UI under download button into a cleaner advisory card style.
+- Refined overall layout and spacing for a more professional settings experience.
+
 ## [1.0.9] - 2026-03-30
 
 ### Added
