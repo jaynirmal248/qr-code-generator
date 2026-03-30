@@ -13,8 +13,7 @@ const dotFill = document.getElementById("dotFill");
 const qrOutput = document.getElementById("qrOutput");
 const clearBtn = document.getElementById("clearBtn");
 const downloadBtn = document.getElementById("downloadBtn");
-const downloadWarning = document.getElementById("downloadWarning");
-const downloadWarningText = document.getElementById("downloadWarningText");
+const downloadHint = document.getElementById("downloadHint");
 const statusMessage = document.getElementById("statusMessage");
 const charCount = document.getElementById("charCount");
 const qualityBadge = document.getElementById("qualityBadge");
@@ -325,13 +324,19 @@ function buildQrPayload() {
 
       const phone = rawPhone.replace(/\D/g, "");
       const message = getInputValue("whatsappText");
+      const platform = document.querySelector('input[name="whatsappPlatform"]:checked').value;
       const params = new URLSearchParams();
       if (message) {
         params.set("text", message);
       }
 
       const query = params.toString();
-      const value = query ? `https://wa.me/${phone}?${query}` : `https://wa.me/${phone}`;
+      let value;
+      if (platform === "business") {
+        value = query ? `https://wa.business.me/${phone}?${query}` : `https://wa.business.me/${phone}`;
+      } else {
+        value = query ? `https://wa.me/${phone}?${query}` : `https://wa.me/${phone}`;
+      }
       return { value };
     }
 
@@ -409,7 +414,8 @@ function evaluateQRQuality(contentLength) {
 function updateQualityDisplay(assessment) {
   if (!qrReady || !assessment) {
     qualityBadge.hidden = true;
-    downloadWarning.hidden = true;
+    downloadHint.textContent = "Generate a QR first, then click Download to run a quality check.";
+    downloadHint.className = "download-hint";
     return;
   }
 
@@ -418,17 +424,18 @@ function updateQualityDisplay(assessment) {
   qualityBadge.hidden = false;
 
   if (assessment.issues.length > 0) {
-    downloadWarningText.textContent = assessment.issues.join(" ");
-    downloadWarning.hidden = false;
+    downloadHint.textContent = "Potential scan issues detected. A warning popup will appear when you click Download.";
+    downloadHint.className = "download-hint hint-caution";
   } else {
-    downloadWarning.hidden = true;
+    downloadHint.textContent = "Looks good. Download should proceed without warning popup.";
+    downloadHint.className = "download-hint hint-safe";
   }
 }
 
 function setStatus(message, isError = false) {
   statusMessage.textContent = message;
-  statusMessage.style.background = isError ? "#ffe6e6" : "#def7f4";
-  statusMessage.style.color = isError ? "#8b1b1b" : "#114b46";
+  statusMessage.classList.toggle("status-error", isError);
+  statusMessage.classList.toggle("status-ok", !isError);
 }
 
 function clearQR() {
@@ -437,7 +444,8 @@ function clearQR() {
   qrReady = false;
   latestCanvas = null;
   qualityBadge.hidden = true;
-  downloadWarning.hidden = true;
+  downloadHint.textContent = "Generate a QR first, then click Download to run a quality check.";
+  downloadHint.className = "download-hint";
 }
 
 function updateRangeVisual(rangeElement, valueElement, valueText) {
@@ -613,19 +621,25 @@ function initDraggableTypeMenu() {
   let pointerDown = false;
   let dragMoved = false;
   let startX = 0;
+  let startY = 0;
   let startScrollLeft = 0;
+  const dragThreshold = 12;
 
   typeMenuWrap.addEventListener("pointerdown", (event) => {
     if (event.button !== 0) {
       return;
     }
 
+    // Keep native clicks on tabs/buttons working; only start drag tracking.
+    if (event.target.closest(".type-scroll-btn")) {
+      return;
+    }
+
     pointerDown = true;
     dragMoved = false;
     startX = event.clientX;
+    startY = event.clientY;
     startScrollLeft = typeMenuWrap.scrollLeft;
-    typeMenuWrap.classList.add("dragging");
-    typeMenuWrap.setPointerCapture(event.pointerId);
   });
 
   typeMenuWrap.addEventListener("pointermove", (event) => {
@@ -633,17 +647,24 @@ function initDraggableTypeMenu() {
       return;
     }
 
-    const delta = event.clientX - startX;
-    if (Math.abs(delta) > 4) {
+    const deltaX = event.clientX - startX;
+    const deltaY = event.clientY - startY;
+
+    if (Math.abs(deltaX) > dragThreshold && Math.abs(deltaX) > Math.abs(deltaY)) {
       dragMoved = true;
+      typeMenuWrap.classList.add("dragging");
     }
 
-    typeMenuWrap.scrollLeft = startScrollLeft - delta;
+    if (!dragMoved) {
+      return;
+    }
+
+    typeMenuWrap.scrollLeft = startScrollLeft - deltaX;
     updateTabScrollButtons();
     event.preventDefault();
   });
 
-  function endDrag(event) {
+  function endDrag() {
     if (!pointerDown) {
       return;
     }
@@ -651,20 +672,20 @@ function initDraggableTypeMenu() {
     pointerDown = false;
     typeMenuWrap.classList.remove("dragging");
 
-    if (typeof event.pointerId === "number" && typeMenuWrap.hasPointerCapture(event.pointerId)) {
-      typeMenuWrap.releasePointerCapture(event.pointerId);
-    }
-
     if (dragMoved) {
       suppressTabClick = true;
       window.setTimeout(() => {
         suppressTabClick = false;
-      }, 0);
+      }, 120);
     }
   }
 
   typeMenuWrap.addEventListener("pointerup", endDrag);
   typeMenuWrap.addEventListener("pointercancel", endDrag);
+  typeMenuWrap.addEventListener("pointerleave", endDrag);
+  typeMenuWrap.addEventListener("dragstart", (event) => {
+    event.preventDefault();
+  });
   typeMenuWrap.addEventListener("scroll", updateTabScrollButtons);
   window.addEventListener("resize", updateTabScrollButtons);
 

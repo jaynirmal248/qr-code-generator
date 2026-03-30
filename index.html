@@ -203,6 +203,21 @@
           <div class="content-panel" data-type="whatsapp">
             <label for="whatsappPhone">WhatsApp Number</label>
             <input id="whatsappPhone" type="text" placeholder="919876543210" />
+            
+            <div class="toggle-group">
+              <label>Platform</label>
+              <div class="toggle-options">
+                <label class="toggle-option">
+                  <input type="radio" name="whatsappPlatform" value="whatsapp" checked />
+                  <span>WhatsApp</span>
+                </label>
+                <label class="toggle-option">
+                  <input type="radio" name="whatsappPlatform" value="business" />
+                  <span>WhatsApp Business</span>
+                </label>
+              </div>
+            </div>
+            
             <label for="whatsappText">Prefilled Message (optional)</label>
             <textarea id="whatsappText" rows="3" placeholder="Hi, I came from your QR code."></textarea>
           </div>
@@ -283,24 +298,20 @@
         </div>
         <p class="preview-note">Preview remains fixed, while export keeps your selected pixel size.</p>
 
-        <div class="quality-section">
-          <div id="qualityBadge" class="quality-badge" hidden>
-            <span class="quality-label">Quality</span>
-            <strong id="qualityScore"></strong>
+        <div class="preview-actions">
+          <div class="quality-section">
+            <div id="qualityBadge" class="quality-badge" hidden>
+              <span class="quality-label">Quality</span>
+              <strong id="qualityScore"></strong>
+            </div>
           </div>
+
+          <button id="downloadBtn" class="download-btn" type="button" disabled>Download PNG</button>
+
+          <p id="downloadHint" class="download-hint">A quality check will run when you click Download.</p>
+
+          <p id="statusMessage" class="status status-ok">Ready to generate.</p>
         </div>
-
-        <button id="downloadBtn" class="download-btn" type="button" disabled>Download PNG</button>
-
-        <div id="downloadWarning" class="advisory-card" hidden>
-          <div class="advisory-head">
-            <span class="advisory-dot"></span>
-            <strong>Scan Reliability Advisory</strong>
-          </div>
-          <p id="downloadWarningText"></p>
-        </div>
-
-        <p id="statusMessage" class="status">Ready to generate.</p>
       </aside>
     </section>
   </main>
