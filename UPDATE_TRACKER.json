@@ -1,9 +1,22 @@
 {
   "project": "QR Code Generator",
   "last_updated": "2026-03-30",
-  "latest_version": "1.0.6",
-  "total_updates": 7,
+  "latest_version": "1.0.7",
+  "total_updates": 8,
   "history": [
+    {
+      "id": 8,
+      "date": "2026-03-30",
+      "version": "1.0.7",
+      "summary": "Made QR preview sticky to stay visible in viewport while scrolling through controls.",
+      "files_touched": [
+        "styles.css",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "COMMIT_DRAFT.md"
+      ]
+    },
     {
       "id": 7,
       "date": "2026-03-30",

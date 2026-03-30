@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here.
 
+## [1.0.7] - 2026-03-30
+
+### Changed
+
+- QR preview now stays sticky and visible in the viewport while scrolling through controls.
+- Preview stays centered and maintains optimal viewing angle during scroll.
+
 ## [1.0.6] - 2026-03-30
 
 ### Added
