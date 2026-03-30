@@ -295,6 +295,46 @@ button:hover {
   padding: 8px 10px;
 }
 
+.quality-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.quality-badge {
+  background: linear-gradient(135deg, #f0f8ff, #e8f3ff);
+  border: 1px solid #c7dcf7;
+  border-radius: 999px;
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.quality-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+#qualityScore {
+  color: var(--accent);
+  min-width: 80px;
+  text-align: right;
+}
+
+#qualityScore.quality-good {
+  color: #22c55e;
+}
+
+#qualityScore.quality-moderate {
+  color: #f59e0b;
+}
+
+#qualityScore.quality-poor {
+  color: #ef4444;
+}
+
 .download-warning {
   background: #fff3cd;
   border: 1px solid #ffc107;

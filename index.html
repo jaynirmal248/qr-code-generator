@@ -90,6 +90,12 @@
           <p class="placeholder">Your QR code will appear here</p>
         </div>
         <p class="preview-note">Preview stays fixed. Download/export uses selected pixel size.</p>
+        <div class="quality-section">
+          <div id="qualityBadge" class="quality-badge" hidden>
+            <span class="quality-label">Quality:</span>
+            <strong id="qualityScore"></strong>
+          </div>
+        </div>
         <button id="downloadBtn" class="download-btn" type="button" disabled>Download PNG</button>
         <div id="downloadWarning" class="download-warning" hidden>
           <strong>⚠ Note:</strong>
@@ -99,27 +105,6 @@
       </div>
     </section>
   </main>
-
-  <div id="downloadModal" class="modal" hidden>
-    <div class="modal-overlay"></div>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Download QR Code</h2>
-        <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Close">×</button>
-      </div>
-      <div class="modal-body">
-        <div id="modalWarnings" class="modal-warnings" hidden>
-          <strong>⚠ Scan Reliability Notice</strong>
-          <p id="modalWarningsText"></p>
-        </div>
-        <p class="modal-info">Your QR code is ready to download. Verify the design settings above if you want to adjust scanability.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="modalCancelBtn" class="btn-secondary">Change Design</button>
-        <button type="button" id="modalConfirmBtn" class="btn-primary">Download Anyway</button>
-      </div>
-    </div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
   <script src="script.js"></script>

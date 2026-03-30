@@ -9,58 +9,85 @@ const clearBtn = document.getElementById("clearBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 const downloadWarning = document.getElementById("downloadWarning");
 const downloadWarningText = document.getElementById("downloadWarningText");
-const downloadModal = document.getElementById("downloadModal");
-const modalWarnings = document.getElementById("modalWarnings");
-const modalWarningsText = document.getElementById("modalWarningsText");
-const modalCloseBtn = document.getElementById("modalCloseBtn");
-const modalCancelBtn = document.getElementById("modalCancelBtn");
-const modalConfirmBtn = document.getElementById("modalConfirmBtn");
-
-let pendingDownload = false;
+const statusMessage = document.getElementById("statusMessage");
+const charCount = document.getElementById("charCount");
+const qualityBadge = document.getElementById("qualityBadge");
+const qualityScore = document.getElementById("qualityScore");
 const qrSizeValue = document.getElementById("qrSizeValue");
 const dotFillValue = document.getElementById("dotFillValue");
-const scanWarning = document.getElementById("scanWarning");
-const scanWarningText = document.getElementById("scanWarningText");
 
 let qrReady = false;
 let latestCanvas = null;
 
-function updateWarningDisplay() {
+function evaluateQRQuality() {
   const detail = qrDetail.value;
   const fill = Number.parseInt(dotFill.value, 10);
   const style = dotStyle.value;
   const content = qrText.value.trim();
+  const size = Number.parseInt(qrSize.value, 10);
 
-  const warnings = [];
+  let qualityScore_val = 100;
+  const issues = [];
 
+  // Deduct points based on settings
   if (detail === "ultra") {
-    warnings.push("Ultra dense patterns may be harder to scan on small screens or with low-quality cameras.");
+    qualityScore_val -= 25;
+    issues.push("Ultra dense reduces scannability");
+  } else if (detail === "dense") {
+    qualityScore_val -= 10;
   }
 
-  if (fill < 65) {
-    warnings.push("Very low dot fill creates large spacing, reducing scannability.");
+  if (fill < 60) {
+    qualityScore_val -= 20;
+    issues.push("Very low dot fill reduces scan reliability");
+  } else if (fill < 75) {
+    qualityScore_val -= 10;
   }
 
   if (style === "round") {
-    warnings.push("Round dots may reduce scan reliability compared to square dots.");
+    qualityScore_val -= 15;
+    issues.push("Round dots may reduce scannability");
   }
 
   if (content.length > 500 && detail === "ultra") {
-    warnings.push("The combination of large content + ultra dense pattern significantly reduces scannability.");
+    qualityScore_val -= 20;
+    issues.push("Large content in ultra dense mode reduces scannability");
   }
 
-  // Update form warning
-  if (warnings.length > 0) {
-    scanWarningText.textContent = warnings.join(" ");
-    scanWarning.hidden = false;
-    downloadWarningText.textContent = warnings.join(" ");
+  if (size < 200) {
+    qualityScore_val -= 10;
+    issues.push("Small export size may affect scanability");
+  }
+
+  qualityScore_val = Math.max(0, qualityScore_val);
+
+  return {
+    score: qualityScore_val,
+    issues: issues,
+    quality: qualityScore_val >= 75 ? "good" : qualityScore_val >= 50 ? "moderate" : "poor"
+  };
+}
+
+function updateQualityDisplay() {
+  if (!qrReady) {
+    qualityBadge.hidden = true;
+    return;
+  }
+
+  const eval_result = evaluateQRQuality();
+  const { score, issues, quality } = eval_result;
+
+  qualityScore.textContent = `${score}% Scannable`;
+  qualityScore.className = `quality-${quality}`;
+  qualityBadge.hidden = false;
+
+  // Update download warning based on quality
+  if (issues.length > 0 && quality !== "good") {
+    downloadWarningText.textContent = issues.join(" ");
     downloadWarning.hidden = false;
   } else {
-    scanWarning.hidden = true;
     downloadWarning.hidden = true;
   }
-
-  return warnings;
 }
 
 function setStatus(message, isError = false) {
@@ -74,6 +101,8 @@ function clearQR() {
   downloadBtn.disabled = true;
   qrReady = false;
   latestCanvas = null;
+  qualityBadge.hidden = true;
+  downloadWarning.hidden = true;
 }
 
 function updateRangeVisual(rangeElement, valueElement, valueText) {
@@ -190,7 +219,7 @@ function generateQRCode(isLiveResize = false) {
 
   qrReady = true;
   downloadBtn.disabled = false;
-  checkScanability();
+  updateQualityDisplay();
 
   if (isLiveResize) {
     setStatus(`Preview updated. Export size ${outputSize} x ${outputSize}.`);
@@ -200,26 +229,25 @@ function generateQRCode(isLiveResize = false) {
   setStatus(`QR generated. Export size ${outputSize} x ${outputSize}.`);
 }
 
-function openDownloadModal() {
-  const warnings = updateWarningDisplay();
+// Event Listeners
+qrForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  generateQRCode();
+});
 
-  if (warnings.length > 0) {
-    modalWarningsText.textContent = warnings.join(" ");
-    modalWarnings.hidden = false;
-  } else {
-    modalWarnings.hidden = true;
+clearBtn.addEventListener("click", () => {
+  qrText.value = "";
+  charCount.textContent = "0 / 1200";
+  clearQR();
+  setStatus("Fields cleared.");
+});
+
+downloadBtn.addEventListener("click", () => {
+  if (!qrReady) {
+    setStatus("Generate a QR code before downloading.", true);
+    return;
   }
 
-  downloadModal.hidden = false;
-  pendingDownload = true;
-}
-
-function closeDownloadModal() {
-  downloadModal.hidden = true;
-  pendingDownload = false;
-}
-
-function executeDownload() {
   if (!latestCanvas) {
     setStatus("Generate a QR code before downloading.", true);
     return;
@@ -240,28 +268,7 @@ function executeDownload() {
   link.remove();
 
   setStatus("PNG downloaded successfully.");
-  closeDownloadModal();
-}
-
-qrForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  generateQRCode();
 });
-
-clearBtn.addEventListener("click", () => {
-  qrText.value = "";
-  charCount.textContent = "0 / 1200";
-  clearQR();
-  setStatus("Fields cleared.");
-});
-
-downloadBtn.addEventListener("click", openDownloadModal);
-
-modalCloseBtn.addEventListener("click", closeDownloadModal);
-
-modalCancelBtn.addEventListener("click", closeDownloadModal);
-
-modalConfirmBtn.addEventListener("click", executeDownload);
 
 qrText.addEventListener("input", () => {
   charCount.textContent = `${qrText.value.length} / 1200`;
@@ -275,7 +282,7 @@ qrText.addEventListener("input", () => {
 qrSize.addEventListener("input", () => {
   const size = Number.parseInt(qrSize.value, 10);
   updateRangeVisual(qrSize, qrSizeValue, `${size} x ${size}`);
-  checkScanability();
+  updateQualityDisplay();
 
   if (qrReady) {
     generateQRCode(true);
@@ -285,7 +292,7 @@ qrSize.addEventListener("input", () => {
 dotFill.addEventListener("input", () => {
   const fill = Number.parseInt(dotFill.value, 10);
   updateRangeVisual(dotFill, dotFillValue, `${fill}%`);
-  checkScanability();
+  updateQualityDisplay();
 
   if (qrReady) {
     generateQRCode(true);
@@ -293,7 +300,7 @@ dotFill.addEventListener("input", () => {
 });
 
 dotStyle.addEventListener("change", () => {
-  checkScanability();
+  updateQualityDisplay();
 
   if (qrReady) {
     generateQRCode(true);
@@ -301,7 +308,7 @@ dotStyle.addEventListener("change", () => {
 });
 
 qrDetail.addEventListener("change", () => {
-  checkScanability();
+  updateQualityDisplay();
 
   if (qrReady) {
     generateQRCode(true);
@@ -314,6 +321,7 @@ qrText.addEventListener("keydown", (event) => {
   }
 });
 
+// Initialize
 clearQR();
 updateRangeVisual(
   qrSize,

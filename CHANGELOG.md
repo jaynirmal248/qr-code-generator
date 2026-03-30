@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented here.
 
+## [1.0.9] - 2026-03-30
+
+### Added
+
+- Added smart real-time QR quality evaluation showing scanability percentage.
+- Quality badge displays inline showing scores from 0-100%.
+- Automatic quality assessment based on pattern detail, dot fill, dot style, content length, and export size.
+
+### Changed
+
+- Removed download modal popup; users now see quality score and warnings automatically without interaction required.
+- Download now directly exports QR without confirmation dialog.
+- Warnings update in real-time as users adjust QR design settings.
+
 ## [1.0.8] - 2026-03-30
 
 ### Added
