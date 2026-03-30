@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented here.
 
+## [1.1.1] - 2026-03-30
+
+### Added
+
+- Added draggable horizontal category tabs with pointer drag support and left/right navigation buttons.
+- Added visual drag feedback and smart tab-scroll controls for better usability on desktop and mobile.
+
+### Changed
+
+- Rebuilt the full website UI with a more professional studio-style layout and improved visual hierarchy.
+- Upgraded typography, color treatment, spacing, and component styling across header, builder, preview, and modal.
+- Improved responsiveness and polish for both desktop and mobile views.
+
 ## [1.1.0] - 2026-03-30
 
 ### Added

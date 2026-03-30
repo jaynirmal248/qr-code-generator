@@ -5,12 +5,14 @@ A clean, responsive QR Code Generator built with plain HTML, CSS, and JavaScript
 ## Features
 
 - Generate QR codes with category templates via header menu: URL, Text, Email, Phone, SMS, WiFi, Location, vCard, MeCard, Event, Bitcoin, social links, WhatsApp, and app links.
+- Draggable category tab strip with left/right navigation controls for smoother type browsing.
 - Choose output size from 160 px to 1000 px using a professional slider.
 - Keep preview size fixed while export/download uses selected output size.
 - Control QR look with pattern detail presets and dot style/fill customization.
 - Smart real-time QR quality evaluation showing scanability percentage.
 - Refined advisory warning card near download for cleaner professional UI.
 - Download warning popup appears automatically when risky settings are detected.
+- Fully rebuilt professional UI with studio-style hero, cleaner spacing, and improved component hierarchy.
 - QR preview centered with optimal viewing angle regardless of content complexity.
 - QR preview stays sticky and visible in viewport while adjusting controls.
 - Download generated QR code as PNG (direct when safe, confirmation popup when warnings exist).

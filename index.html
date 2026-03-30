@@ -6,48 +6,62 @@
   <title>QR Code Generator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="bg-orb bg-orb-a" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-b" aria-hidden="true"></div>
+
   <main class="page">
-    <header class="card intro reveal-1">
-      <div class="intro-top">
+    <header class="hero card reveal-1">
+      <div class="hero-main">
         <div>
           <p class="eyebrow">QR Studio</p>
-          <h1>QR Code Generator</h1>
-          <p class="subtitle">Create polished QR codes with structured content templates and quality-safe downloads.</p>
+          <h1>Professional QR Generator</h1>
+          <p class="subtitle">Design polished static QR codes with smart quality checks, professional content templates, and export-ready output.</p>
         </div>
-        <span class="mode-chip">Static Codes</span>
+        <div class="hero-meta">
+          <span class="meta-chip">Static QR</span>
+          <span class="meta-chip">Print Ready</span>
+          <span class="meta-chip">No Watermark</span>
+        </div>
       </div>
 
-      <nav class="type-menu" id="typeMenu" aria-label="QR content types">
-        <button type="button" class="type-tab active" data-type="url">URL</button>
-        <button type="button" class="type-tab" data-type="text">Text</button>
-        <button type="button" class="type-tab" data-type="email">Email</button>
-        <button type="button" class="type-tab" data-type="phone">Phone</button>
-        <button type="button" class="type-tab" data-type="sms">SMS</button>
-        <button type="button" class="type-tab" data-type="wifi">WiFi</button>
-        <button type="button" class="type-tab" data-type="location">Location</button>
-        <button type="button" class="type-tab" data-type="vcard">vCard</button>
-        <button type="button" class="type-tab" data-type="mecard">MeCard</button>
-        <button type="button" class="type-tab" data-type="event">Event</button>
-        <button type="button" class="type-tab" data-type="bitcoin">Bitcoin</button>
-        <button type="button" class="type-tab" data-type="facebook">Facebook</button>
-        <button type="button" class="type-tab" data-type="twitter">Twitter</button>
-        <button type="button" class="type-tab" data-type="youtube">YouTube</button>
-        <button type="button" class="type-tab" data-type="instagram">Instagram</button>
-        <button type="button" class="type-tab" data-type="linkedin">LinkedIn</button>
-        <button type="button" class="type-tab" data-type="whatsapp">WhatsApp</button>
-        <button type="button" class="type-tab" data-type="app">App Link</button>
-      </nav>
+      <div class="type-dock" aria-label="QR content type menu">
+        <button type="button" class="type-scroll-btn" id="typeScrollPrev" aria-label="Scroll categories left">&#10094;</button>
+        <div class="type-menu-wrap" id="typeMenuWrap">
+          <nav class="type-menu" id="typeMenu" aria-label="QR content types">
+            <button type="button" class="type-tab active" data-type="url">URL</button>
+            <button type="button" class="type-tab" data-type="text">Text</button>
+            <button type="button" class="type-tab" data-type="email">Email</button>
+            <button type="button" class="type-tab" data-type="phone">Phone</button>
+            <button type="button" class="type-tab" data-type="sms">SMS</button>
+            <button type="button" class="type-tab" data-type="wifi">WiFi</button>
+            <button type="button" class="type-tab" data-type="location">Location</button>
+            <button type="button" class="type-tab" data-type="vcard">vCard</button>
+            <button type="button" class="type-tab" data-type="mecard">MeCard</button>
+            <button type="button" class="type-tab" data-type="event">Event</button>
+            <button type="button" class="type-tab" data-type="bitcoin">Bitcoin</button>
+            <button type="button" class="type-tab" data-type="facebook">Facebook</button>
+            <button type="button" class="type-tab" data-type="twitter">Twitter</button>
+            <button type="button" class="type-tab" data-type="youtube">YouTube</button>
+            <button type="button" class="type-tab" data-type="instagram">Instagram</button>
+            <button type="button" class="type-tab" data-type="linkedin">LinkedIn</button>
+            <button type="button" class="type-tab" data-type="whatsapp">WhatsApp</button>
+            <button type="button" class="type-tab" data-type="app">App Link</button>
+          </nav>
+        </div>
+        <button type="button" class="type-scroll-btn" id="typeScrollNext" aria-label="Scroll categories right">&#10095;</button>
+      </div>
+      <p class="drag-tip">Tip: drag the category strip horizontally to browse all content types.</p>
     </header>
 
-    <section class="card tool reveal-2">
-      <form id="qrForm" class="form" novalidate>
+    <section class="workspace card reveal-2">
+      <form id="qrForm" class="builder" novalidate>
         <section class="setting-card">
           <div class="setting-head">
-            <h2>Content Builder</h2>
+            <h2>Content</h2>
             <p id="contentTypeLabel">Type: URL</p>
           </div>
 
@@ -201,8 +215,8 @@
 
         <section class="setting-card">
           <div class="setting-head">
-            <h2>Design Settings</h2>
-            <p>Fine tune visual style and export quality.</p>
+            <h2>Design</h2>
+            <p>Customize output quality and style.</p>
           </div>
 
           <label for="qrSize">QR Size</label>
@@ -263,11 +277,11 @@
         </div>
       </form>
 
-      <aside class="result-wrap">
+      <aside class="preview-panel">
         <div id="qrOutput" class="qr-output" aria-live="polite">
           <p class="placeholder">Your QR code will appear here</p>
         </div>
-        <p class="preview-note">Preview stays fixed. Download/export uses selected pixel size.</p>
+        <p class="preview-note">Preview remains fixed, while export keeps your selected pixel size.</p>
 
         <div class="quality-section">
           <div id="qualityBadge" class="quality-badge" hidden>
@@ -296,14 +310,14 @@
     <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
       <div class="modal-header">
         <h2 id="downloadModalTitle">Warning Before Download</h2>
-        <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Close">×</button>
+        <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
         <div class="modal-warnings">
           <strong>Current settings may reduce scanability:</strong>
           <p id="modalWarningsText"></p>
         </div>
-        <p class="modal-info">You can still continue the download, or go back and adjust settings for better scan quality.</p>
+        <p class="modal-info">You can continue the download, or adjust design settings for more reliable scanning.</p>
       </div>
       <div class="modal-footer">
         <button type="button" id="modalCancelBtn" class="btn-secondary">Change Settings</button>

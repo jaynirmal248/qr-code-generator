@@ -2,6 +2,9 @@ const qrForm = document.getElementById("qrForm");
 const typeTabs = Array.from(document.querySelectorAll(".type-tab"));
 const contentPanels = Array.from(document.querySelectorAll(".content-panel"));
 const contentTypeLabel = document.getElementById("contentTypeLabel");
+const typeMenuWrap = document.getElementById("typeMenuWrap");
+const typeScrollPrev = document.getElementById("typeScrollPrev");
+const typeScrollNext = document.getElementById("typeScrollNext");
 
 const qrSize = document.getElementById("qrSize");
 const qrDetail = document.getElementById("qrDetail");
@@ -30,6 +33,7 @@ const textInput = document.getElementById("textInput");
 let qrReady = false;
 let latestCanvas = null;
 let activeType = "url";
+let suppressTabClick = false;
 
 const typeLabels = {
   url: "URL",
@@ -591,6 +595,96 @@ function closeDownloadModal() {
   downloadModal.hidden = true;
 }
 
+function updateTabScrollButtons() {
+  if (!typeMenuWrap || !typeScrollPrev || !typeScrollNext) {
+    return;
+  }
+
+  const maxScroll = Math.max(0, typeMenuWrap.scrollWidth - typeMenuWrap.clientWidth);
+  typeScrollPrev.disabled = typeMenuWrap.scrollLeft <= 2;
+  typeScrollNext.disabled = typeMenuWrap.scrollLeft >= maxScroll - 2;
+}
+
+function initDraggableTypeMenu() {
+  if (!typeMenuWrap) {
+    return;
+  }
+
+  let pointerDown = false;
+  let dragMoved = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+
+  typeMenuWrap.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) {
+      return;
+    }
+
+    pointerDown = true;
+    dragMoved = false;
+    startX = event.clientX;
+    startScrollLeft = typeMenuWrap.scrollLeft;
+    typeMenuWrap.classList.add("dragging");
+    typeMenuWrap.setPointerCapture(event.pointerId);
+  });
+
+  typeMenuWrap.addEventListener("pointermove", (event) => {
+    if (!pointerDown) {
+      return;
+    }
+
+    const delta = event.clientX - startX;
+    if (Math.abs(delta) > 4) {
+      dragMoved = true;
+    }
+
+    typeMenuWrap.scrollLeft = startScrollLeft - delta;
+    updateTabScrollButtons();
+    event.preventDefault();
+  });
+
+  function endDrag(event) {
+    if (!pointerDown) {
+      return;
+    }
+
+    pointerDown = false;
+    typeMenuWrap.classList.remove("dragging");
+
+    if (typeof event.pointerId === "number" && typeMenuWrap.hasPointerCapture(event.pointerId)) {
+      typeMenuWrap.releasePointerCapture(event.pointerId);
+    }
+
+    if (dragMoved) {
+      suppressTabClick = true;
+      window.setTimeout(() => {
+        suppressTabClick = false;
+      }, 0);
+    }
+  }
+
+  typeMenuWrap.addEventListener("pointerup", endDrag);
+  typeMenuWrap.addEventListener("pointercancel", endDrag);
+  typeMenuWrap.addEventListener("scroll", updateTabScrollButtons);
+  window.addEventListener("resize", updateTabScrollButtons);
+
+  if (typeScrollPrev) {
+    typeScrollPrev.addEventListener("click", () => {
+      typeMenuWrap.scrollBy({ left: -220, behavior: "smooth" });
+      window.setTimeout(updateTabScrollButtons, 220);
+    });
+  }
+
+  if (typeScrollNext) {
+    typeScrollNext.addEventListener("click", () => {
+      typeMenuWrap.scrollBy({ left: 220, behavior: "smooth" });
+      window.setTimeout(updateTabScrollButtons, 220);
+    });
+  }
+
+  updateTabScrollButtons();
+}
+
 function setActiveType(type) {
   activeType = type;
 
@@ -636,6 +730,10 @@ qrForm.addEventListener("submit", (event) => {
 
 typeTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
+    if (suppressTabClick) {
+      return;
+    }
+
     setActiveType(tab.dataset.type);
   });
 });
@@ -724,6 +822,7 @@ qrDetail.addEventListener("change", () => {
 });
 
 // Initialize
+initDraggableTypeMenu();
 setActiveType("url");
 clearQR();
 updateRangeVisual(

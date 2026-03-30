@@ -1,9 +1,24 @@
 {
   "project": "QR Code Generator",
   "last_updated": "2026-03-30",
-  "latest_version": "1.1.0",
-  "total_updates": 11,
+  "latest_version": "1.1.1",
+  "total_updates": 12,
   "history": [
+    {
+      "id": 12,
+      "date": "2026-03-30",
+      "version": "1.1.1",
+      "summary": "Fully rebuilt website UI and added professional draggable category tab strip with navigation controls.",
+      "files_touched": [
+        "index.html",
+        "styles.css",
+        "script.js",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "COMMIT_DRAFT.md"
+      ]
+    },
     {
       "id": 11,
       "date": "2026-03-30",
