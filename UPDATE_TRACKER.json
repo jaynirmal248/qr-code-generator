@@ -1,9 +1,39 @@
 {
   "project": "QR Code Generator",
   "last_updated": "2026-03-30",
-  "latest_version": "1.0.4",
-  "total_updates": 5,
+  "latest_version": "1.0.6",
+  "total_updates": 7,
   "history": [
+    {
+      "id": 7,
+      "date": "2026-03-30",
+      "version": "1.0.6",
+      "summary": "Added scanability warning system and fixed QR preview center/viewing angle.",
+      "files_touched": [
+        "index.html",
+        "styles.css",
+        "script.js",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "COMMIT_DRAFT.md"
+      ]
+    },
+    {
+      "id": 6,
+      "date": "2026-03-30",
+      "version": "1.0.5",
+      "summary": "Kept preview size fixed and added dot style/fill plus dense pattern controls for QR rendering.",
+      "files_touched": [
+        "index.html",
+        "styles.css",
+        "script.js",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "COMMIT_DRAFT.md"
+      ]
+    },
     {
       "id": 5,
       "date": "2026-03-30",

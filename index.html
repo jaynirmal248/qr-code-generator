@@ -42,9 +42,46 @@
           </div>
         </div>
 
+        <label for="qrDetail">Pattern Detail</label>
+        <select id="qrDetail">
+          <option value="auto" selected>Auto</option>
+          <option value="dense">Dense (more dots)</option>
+          <option value="ultra">Ultra Dense (many dots)</option>
+        </select>
+
+        <label for="dotStyle">Dot Style</label>
+        <select id="dotStyle">
+          <option value="square" selected>Square</option>
+          <option value="round">Round</option>
+        </select>
+
+        <label for="dotFill">Dot Fill</label>
+        <div class="size-control">
+          <input
+            id="dotFill"
+            class="size-slider"
+            type="range"
+            min="55"
+            max="100"
+            step="1"
+            value="90"
+            aria-describedby="dotFillValue"
+          />
+          <div class="size-meta">
+            <span>55%</span>
+            <strong id="dotFillValue">90%</strong>
+            <span>100%</span>
+          </div>
+        </div>
+
         <div class="button-row">
           <button type="submit" id="generateBtn">Generate QR</button>
           <button type="button" id="clearBtn" class="btn-secondary">Clear</button>
+        </div>
+
+        <div id="scanWarning" class="scan-warning" hidden>
+          <strong>⚠ Scan Warning:</strong>
+          <p id="scanWarningText"></p>
         </div>
       </form>
 
@@ -52,13 +89,14 @@
         <div id="qrOutput" class="qr-output" aria-live="polite">
           <p class="placeholder">Your QR code will appear here</p>
         </div>
+        <p class="preview-note">Preview stays fixed. Download/export uses selected pixel size.</p>
         <button id="downloadBtn" class="download-btn" type="button" disabled>Download PNG</button>
         <p id="statusMessage" class="status">Ready to generate.</p>
       </div>
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -2,6 +2,30 @@
 
 All notable changes to this project are documented here.
 
+## [1.0.6] - 2026-03-30
+
+### Added
+
+- Added real-time scanability warnings when QR settings may reduce scan reliability.
+- Warning conditions include: ultra-dense patterns, very low dot fill, round dots, and large content in ultra mode.
+
+### Changed
+
+- QR preview is now always centered with optimal viewing angle for any content complexity.
+- Improved QR output display consistency and alignment in the preview area.
+
+## [1.0.5] - 2026-03-30
+
+### Added
+
+- Added QR pattern detail presets for denser dot patterns.
+- Added dot style selection (square/round) and dot fill slider for spacing control.
+
+### Changed
+
+- Preview rendering is now fixed-size for consistent UI while export keeps selected output size.
+- Switched QR rendering to custom canvas drawing for richer visual customization.
+
 ## [1.0.4] - 2026-03-30
 
 ### Added

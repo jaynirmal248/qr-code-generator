@@ -85,7 +85,8 @@ button {
   font: inherit;
 }
 
-textarea {
+textarea,
+select {
   width: 100%;
   border-radius: 12px;
   border: 1px solid var(--line);
@@ -95,6 +96,7 @@ textarea {
 }
 
 textarea:focus,
+select:focus,
 input[type="range"]:focus,
 button:focus-visible {
   outline: 2px solid var(--focus);
@@ -233,17 +235,51 @@ button:hover {
   place-items: center;
   padding: 12px;
   background: #ffffff;
+  align-content: center;
+  justify-content: center;
 }
 
 .qr-output canvas,
 .qr-output img {
+  width: min(280px, 100%);
+  height: min(280px, 100%);
   max-width: 100%;
-  height: auto;
+  max-height: 100%;
+  display: block;
+  margin: auto;
 }
 
 .placeholder {
   margin: 0;
   color: var(--muted);
+}
+
+.preview-note {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.scan-warning {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  color: #856404;
+  margin: 8px 0 0;
+}
+
+.scan-warning strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #654321;
+}
+
+.scan-warning p {
+  margin: 0;
+  line-height: 1.4;
 }
 
 .status {
