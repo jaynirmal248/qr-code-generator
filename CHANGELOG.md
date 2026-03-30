@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here.
 
+## [1.0.4] - 2026-03-30
+
+### Added
+
+- Added a professional QR size slider with a wide size range from 160 px to 1000 px.
+
+### Changed
+
+- Replaced the old size dropdown with a live size selector and current-size display.
+- Added live QR regeneration while adjusting the slider after a QR has been generated.
+
 ## [1.0.3] - 2026-03-30
 
 ### Changed

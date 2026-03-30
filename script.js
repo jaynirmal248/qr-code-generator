@@ -6,6 +6,7 @@ const clearBtn = document.getElementById("clearBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 const statusMessage = document.getElementById("statusMessage");
 const charCount = document.getElementById("charCount");
+const qrSizeValue = document.getElementById("qrSizeValue");
 
 let qrReady = false;
 
@@ -21,10 +22,23 @@ function clearQR() {
   qrReady = false;
 }
 
-function generateQRCode() {
+function updateSliderVisual(size) {
+  const min = Number.parseInt(qrSize.min, 10);
+  const max = Number.parseInt(qrSize.max, 10);
+  const progress = ((size - min) / (max - min)) * 100;
+
+  qrSize.style.setProperty("--slider-progress", `${progress}%`);
+  qrSizeValue.textContent = `${size} x ${size}`;
+}
+
+function generateQRCode(isLiveResize = false) {
   const value = qrText.value.trim();
 
   if (!value) {
+    if (isLiveResize) {
+      return;
+    }
+
     clearQR();
     setStatus("Please enter text or a URL before generating.", true);
     return;
@@ -44,7 +58,13 @@ function generateQRCode() {
 
   qrReady = true;
   downloadBtn.disabled = false;
-  setStatus("QR code generated successfully.");
+
+  if (isLiveResize) {
+    setStatus(`QR size updated to ${size} x ${size}.`);
+    return;
+  }
+
+  setStatus(`QR code generated successfully at ${size} x ${size}.`);
 }
 
 function downloadQRCode() {
@@ -96,6 +116,15 @@ qrText.addEventListener("input", () => {
   charCount.textContent = `${qrText.value.length} / 1200`;
 });
 
+qrSize.addEventListener("input", () => {
+  const size = Number.parseInt(qrSize.value, 10);
+  updateSliderVisual(size);
+
+  if (qrReady) {
+    generateQRCode(true);
+  }
+});
+
 qrText.addEventListener("keydown", (event) => {
   if (event.ctrlKey && event.key === "Enter") {
     generateQRCode();
@@ -103,3 +132,4 @@ qrText.addEventListener("keydown", (event) => {
 });
 
 clearQR();
+updateSliderVisual(Number.parseInt(qrSize.value, 10));

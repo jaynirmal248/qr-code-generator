@@ -1,9 +1,24 @@
 {
   "project": "QR Code Generator",
   "last_updated": "2026-03-30",
-  "latest_version": "1.0.3",
-  "total_updates": 4,
+  "latest_version": "1.0.4",
+  "total_updates": 5,
   "history": [
+    {
+      "id": 5,
+      "date": "2026-03-30",
+      "version": "1.0.4",
+      "summary": "Expanded QR size support with a professional slider and live size updates.",
+      "files_touched": [
+        "index.html",
+        "styles.css",
+        "script.js",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "COMMIT_DRAFT.md"
+      ]
+    },
     {
       "id": 4,
       "date": "2026-03-30",

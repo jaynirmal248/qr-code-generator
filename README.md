@@ -5,7 +5,7 @@ A clean, responsive QR Code Generator built with plain HTML, CSS, and JavaScript
 ## Features
 
 - Generate QR codes from text, URLs, or any string input.
-- Choose output size before generation.
+- Choose output size from 160 px to 1000 px using a professional slider.
 - Download generated QR code as PNG.
 - Responsive white-themed modern UI.
 - Built-in update governance with changelog and tracking files.

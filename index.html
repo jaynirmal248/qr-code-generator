@@ -24,11 +24,23 @@
         <p id="charCount" class="char-count">0 / 1200</p>
 
         <label for="qrSize">QR Size</label>
-        <select id="qrSize">
-          <option value="200">200 x 200</option>
-          <option value="280" selected>280 x 280</option>
-          <option value="360">360 x 360</option>
-        </select>
+        <div class="size-control">
+          <input
+            id="qrSize"
+            class="size-slider"
+            type="range"
+            min="160"
+            max="1000"
+            step="20"
+            value="320"
+            aria-describedby="qrSizeValue"
+          />
+          <div class="size-meta">
+            <span>160 px</span>
+            <strong id="qrSizeValue">320 x 320</strong>
+            <span>1000 px</span>
+          </div>
+        </div>
 
         <div class="button-row">
           <button type="submit" id="generateBtn">Generate QR</button>
