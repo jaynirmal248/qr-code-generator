@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here.
 
+## [1.0.8] - 2026-03-30
+
+### Added
+
+- Added professional download confirmation modal with scanability warnings.
+- Added warning display near download button.
+- Modal offers users option to download anyway or change design before downloading.
+
 ## [1.0.7] - 2026-03-30
 
 ### Changed

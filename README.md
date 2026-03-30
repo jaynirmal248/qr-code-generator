@@ -9,6 +9,7 @@ A clean, responsive QR Code Generator built with plain HTML, CSS, and JavaScript
 - Keep preview size fixed while export/download uses selected output size.
 - Control QR look with pattern detail presets and dot style/fill customization.
 - Real-time scanability warnings for settings that may reduce QR reliability.
+- Professional download confirmation modal with warning display and design change option.
 - QR preview centered with optimal viewing angle regardless of content complexity.
 - QR preview stays sticky and visible in viewport while adjusting controls.
 - Download generated QR code as PNG.

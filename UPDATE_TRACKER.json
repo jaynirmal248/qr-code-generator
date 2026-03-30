@@ -1,9 +1,24 @@
 {
   "project": "QR Code Generator",
   "last_updated": "2026-03-30",
-  "latest_version": "1.0.7",
-  "total_updates": 8,
+  "latest_version": "1.0.8",
+  "total_updates": 9,
   "history": [
+    {
+      "id": 9,
+      "date": "2026-03-30",
+      "version": "1.0.8",
+      "summary": "Added professional download modal with scanability warnings and design change option.",
+      "files_touched": [
+        "index.html",
+        "styles.css",
+        "script.js",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "COMMIT_DRAFT.md"
+      ]
+    },
     {
       "id": 8,
       "date": "2026-03-30",
