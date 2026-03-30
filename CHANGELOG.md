@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here.
 
+## [1.2.1] - 2026-03-31
+
+### Added
+
+- Added `tools/sync-readme-latest-changelog.ps1` to automatically sync README with the newest version block from `CHANGELOG.md`.
+- Added managed README markers so the latest changelog section can be safely overwritten on every sync.
+
+### Changed
+
+- Updated release workflow documentation to require running changelog-to-README sync whenever a new version is added.
+- Updated maintenance rules to enforce README latest-version sync after changelog updates.
+
 ## [1.2.0] - 2026-03-31
 
 ### Changed

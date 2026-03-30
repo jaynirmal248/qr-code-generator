@@ -1,6 +1,10 @@
-# QR Code Generator
+﻿# QR Code Generator
 
 A clean, responsive QR Code Generator built with plain HTML, CSS, and JavaScript.
+
+## Live Site
+
+- https://jaynirmal248.github.io/qr-code-generator/
 
 ## Features
 
@@ -19,6 +23,24 @@ A clean, responsive QR Code Generator built with plain HTML, CSS, and JavaScript
 - Responsive white-themed modern UI.
 - Built-in update governance with changelog and tracking files.
 
+## Latest Changelog
+
+<!-- LATEST_CHANGELOG:START -->
+### [1.2.1] - 2026-03-31
+
+#### Added
+
+- Added `tools/sync-readme-latest-changelog.ps1` to automatically sync README with the newest version block from `CHANGELOG.md`.
+- Added managed README markers so the latest changelog section can be safely overwritten on every sync.
+
+#### Changed
+
+- Updated release workflow documentation to require running changelog-to-README sync whenever a new version is added.
+- Updated maintenance rules to enforce README latest-version sync after changelog updates.
+
+[View full changelog](CHANGELOG.md)
+<!-- LATEST_CHANGELOG:END -->
+
 ## Project Structure
 
 - `index.html` - Main app layout.
@@ -28,6 +50,7 @@ A clean, responsive QR Code Generator built with plain HTML, CSS, and JavaScript
 - `CHANGELOG.md` - Human-readable update history.
 - `UPDATE_TRACKER.json` - Machine-readable update counter and entries.
 - `GITHUB_UPDATE_CATALOG.md` - Release/update process for GitHub.
+- `tools/sync-readme-latest-changelog.ps1` - Syncs README latest changelog block with newest CHANGELOG entry.
 
 Local private file (ignored from GitHub):
 
@@ -47,10 +70,13 @@ Local private file (ignored from GitHub):
    - Increment `total_updates`.
    - Add a new object in `history`.
    - Set `last_updated` and `latest_version`.
-4. Follow checklist in `GITHUB_UPDATE_CATALOG.md`.
-5. Commit and push.
+4. Run `pwsh ./tools/sync-readme-latest-changelog.ps1` (or PowerShell: `powershell -ExecutionPolicy Bypass -File .\\tools\\sync-readme-latest-changelog.ps1`) to refresh README latest changelog section.
+5. Follow checklist in `GITHUB_UPDATE_CATALOG.md`.
+6. Commit and push.
 
 ## Public Repository Note
 
 - `MAINTENANCE_RULES.md` is intentionally ignored in `.gitignore` to keep local process notes private.
 - `COMMIT_DRAFT.md` is intentionally ignored in `.gitignore` to keep commit drafting notes private.
+
+

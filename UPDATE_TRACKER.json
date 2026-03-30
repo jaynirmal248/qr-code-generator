@@ -1,9 +1,23 @@
 {
   "project": "QR Code Generator",
-  "last_updated": "2026-03-30",
-  "latest_version": "1.1.1",
-  "total_updates": 12,
+  "last_updated": "2026-03-31",
+  "latest_version": "1.2.1",
+  "total_updates": 13,
   "history": [
+    {
+      "id": 13,
+      "date": "2026-03-31",
+      "version": "1.2.1",
+      "summary": "Added automated sync so README always displays the newest changelog version block.",
+      "files_touched": [
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "GITHUB_UPDATE_CATALOG.md",
+        "MAINTENANCE_RULES.md",
+        "tools/sync-readme-latest-changelog.ps1"
+      ]
+    },
     {
       "id": 12,
       "date": "2026-03-30",
