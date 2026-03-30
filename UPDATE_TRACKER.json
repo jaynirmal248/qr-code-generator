@@ -1,0 +1,65 @@
+{
+  "project": "QR Code Generator",
+  "last_updated": "2026-03-30",
+  "latest_version": "1.0.3",
+  "total_updates": 4,
+  "history": [
+    {
+      "id": 4,
+      "date": "2026-03-30",
+      "version": "1.0.3",
+      "summary": "Renamed private workflow files to neutral names and added VS Code local workflow settings.",
+      "files_touched": [
+        ".gitignore",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "MAINTENANCE_RULES.md",
+        "COMMIT_DRAFT.md",
+        ".vscode/settings.json"
+      ]
+    },
+    {
+      "id": 3,
+      "date": "2026-03-30",
+      "version": "1.0.2",
+      "summary": "Added local commit note file workflow and ignored it from public Git tracking.",
+      "files_touched": [
+        ".gitignore",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "COMMIT_DRAFT.md",
+        "MAINTENANCE_RULES.md"
+      ]
+    },
+    {
+      "id": 2,
+      "date": "2026-03-30",
+      "version": "1.0.1",
+      "summary": "Added .gitignore and excluded private local maintenance files from public GitHub tracking.",
+      "files_touched": [
+        ".gitignore",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json"
+      ]
+    },
+    {
+      "id": 1,
+      "date": "2026-03-30",
+      "version": "1.0.0",
+      "summary": "Initial release with QR generation UI, PNG download, and maintenance governance files.",
+      "files_touched": [
+        "index.html",
+        "styles.css",
+        "script.js",
+        "README.md",
+        "CHANGELOG.md",
+        "UPDATE_TRACKER.json",
+        "GITHUB_UPDATE_CATALOG.md",
+        "MAINTENANCE_RULES.md"
+      ]
+    }
+  ]
+}

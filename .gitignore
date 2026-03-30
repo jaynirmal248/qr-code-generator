@@ -1,0 +1,13 @@
+# OS
+Thumbs.db
+Desktop.ini
+
+# Editor
+.vscode/
+
+# Logs
+*.log
+
+# Private/local-only maintenance files
+MAINTENANCE_RULES.md
+COMMIT_DRAFT.md

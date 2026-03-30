@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Code Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="card intro reveal-1">
+      <p class="eyebrow">Web Utility</p>
+      <h1>QR Code Generator</h1>
+      <p class="subtitle">Create high-quality QR codes instantly with a clean export workflow.</p>
+    </section>
+
+    <section class="card tool reveal-2">
+      <form id="qrForm" class="form" novalidate>
+        <label for="qrText">Content</label>
+        <textarea id="qrText" rows="5" maxlength="1200" placeholder="Paste a URL, text, phone number, or any content..."></textarea>
+        <p id="charCount" class="char-count">0 / 1200</p>
+
+        <label for="qrSize">QR Size</label>
+        <select id="qrSize">
+          <option value="200">200 x 200</option>
+          <option value="280" selected>280 x 280</option>
+          <option value="360">360 x 360</option>
+        </select>
+
+        <div class="button-row">
+          <button type="submit" id="generateBtn">Generate QR</button>
+          <button type="button" id="clearBtn" class="btn-secondary">Clear</button>
+        </div>
+      </form>
+
+      <div class="result-wrap">
+        <div id="qrOutput" class="qr-output" aria-live="polite">
+          <p class="placeholder">Your QR code will appear here</p>
+        </div>
+        <button id="downloadBtn" class="download-btn" type="button" disabled>Download PNG</button>
+        <p id="statusMessage" class="status">Ready to generate.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
